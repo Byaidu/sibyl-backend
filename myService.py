@@ -1,7 +1,3 @@
-'''
-SIBYL FILE SYSTEM BACKEND SERVICE
-'''
-
 from webob import Response
 from webob.dec import wsgify
 from paste import httpserver
