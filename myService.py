@@ -170,7 +170,7 @@ def app_factory(global_config, **local_config):
     router = routes.middleware.RoutesMiddleware(dispatch, mapper)
     return router
 
-# logging.basicConfig(level=logging.NOTSET)
+logging.basicConfig(level=logging.NOTSET)
 
 here = os.path.abspath('.')
 app = loadapp('config:config.ini', relative_to=here)
