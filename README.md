@@ -1,5 +1,7 @@
 # sibyl-backend
 
+## Project deploy
+
 ```
-python3 myService.py
+python myService.py
 ```
