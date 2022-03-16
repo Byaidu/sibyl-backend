@@ -146,9 +146,13 @@ def info_create(req):
     params = req.environ['wsgiorg.routing_args'][1]
     env = req.environ
     info = json.load(env['wsgi.input'])['info']
-    sql = f"INSERT into user (name, info) VALUES ('{env['HTTP_X_USER_NAME']}', '{info}')"
+    sql = f"SELECT info FROM user WHERE name = '{env['HTTP_X_USER_NAME']}'"
     cursor.execute(sql)
-    sql = f"UPDATE user SET info = '{info}' WHERE name = '{env['HTTP_X_USER_NAME']}'"
+    result = cursor.fetchall()
+    if result:
+        sql = f"UPDATE user SET info = '{info}' WHERE name = '{env['HTTP_X_USER_NAME']}'"
+    else:
+        sql = f"INSERT into user (name, info) VALUES ('{env['HTTP_X_USER_NAME']}', '{info}')"
     cursor.execute(sql)
     db.commit()
     dump = json.dumps({'result':'success'})
@@ -188,7 +192,6 @@ def app_factory(global_config, **local_config):
     # User Profile
     mapper.connect("/user", controller=info_create, conditions=dict(method=["POST"]))
     mapper.connect("/user", controller=info_read, conditions=dict(method=["GET"]))
-    # mapper.connect("/user/{user}", controller=user_delete, conditions=dict(method=["DELETE"]))
     router = routes.middleware.RoutesMiddleware(dispatch, mapper)
     return router
 
