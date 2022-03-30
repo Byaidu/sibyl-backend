@@ -32,27 +32,17 @@ openstack project create cinder
 openstack project create public
 
 openstack role add --group admin --project admin admin
-openstack role add --group admin --project admin reader
 openstack role add --group admin --project nova admin
-openstack role add --group admin --project nova reader
 openstack role add --group admin --project glance admin
-openstack role add --group admin --project glance reader
 openstack role add --group admin --project demo admin
-openstack role add --group admin --project demo reader
 openstack role add --group admin --project cinder admin
-openstack role add --group admin --project cinder reader
 openstack role add --group admin --project neutron admin
-openstack role add --group admin --project neutron reader
 openstack role add --group premium --project public admin
-openstack role add --group premium --project public reader
 openstack role add --group standard --project public reader
 
 openstack role add --user admin --project admin admin
-openstack role add --user admin --project admin reader
 openstack role add --user nova --project nova admin
-openstack role add --user nova --project nova reader
 openstack role add --user glance --project glance admin
-openstack role add --user glance --project glance reader
 openstack role add --user demo --project demo reader
 openstack role add --user cinder --project cinder reader
 openstack role add --user neutron --project neutron reader
