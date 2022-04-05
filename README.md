@@ -35,13 +35,15 @@ state Pipeline{
 
 ```mermaid
 stateDiagram-v2
-Role_admin:Role_admin
-Role_admin:Browse
-Role_admin:Download
-Role_admin:Upload
-Role_reader:Role_reader
-Role_reader:Browse
-Role_reader:Download
+state Role {
+    Role_admin:Role_admin
+    Role_admin:Browse
+    Role_admin:Download
+    Role_admin:Upload
+    Role_reader:Role_reader
+    Role_reader:Browse
+    Role_reader:Download
+}
 state Group_standard {
     state Group_premium {
         state Group_admin {
@@ -54,15 +56,18 @@ state Group_standard {
     neutron
     cinder
 }
-state Project_* {
+state Project {
+    Project_*
 	Project_admin
 	Project_nova
 	Project_glance
 	Project_public
 }
-Groupstandard:Group_standard
-Groupadmin:Group_admin
-Grouppremium:Group_premium
+state Group {
+    Groupadmin:Group_admin
+    Grouppremium:Group_premium
+    Groupstandard:Group_standard
+}
 Groupadmin --> Project_* : admin
 Grouppremium --> Project_public : admin
 Groupstandard --> Project_public : reader
