@@ -1,5 +1,19 @@
 # sibyl-backend
 
+## Workflow Overview
+
+```mermaid
+sequenceDiagram
+Frontend->>Keystone:Username + Password
+Keystone->>Frontend:Token
+Frontend->>Backend:Token + Request
+Backend->>Keystone:Verify Token
+Keystone->>Backend:Verify Result
+Backend->>NTFS:Operate File
+NTFS->>Backend:Operate Result
+Backend->>Frontend:Request Result
+```
+
 ## Backend Pipeline Overview
 
 ```mermaid
