@@ -1,5 +1,62 @@
 # sibyl-backend
 
+## Backend Pipeline Overview
+
+```mermaid
+stateDiagram-v2
+state Pipeline{
+    direction LR
+	Backend:Backend
+    Backend:Directory
+    Backend:File
+    Backend:Info
+    [*] --> cors
+    cors --> authtoken
+    authtoken --> Backend
+    Backend --> NTFS
+}
+```
+
+## Keystone RBAC Overview
+
+```mermaid
+stateDiagram-v2
+Role_admin:Role_admin
+Role_admin:Browse
+Role_admin:Download
+Role_admin:Upload
+Role_reader:Role_reader
+Role_reader:Browse
+Role_reader:Download
+state Group_standard {
+    state Group_premium {
+        state Group_admin {
+            admin
+        }
+        nova
+        glance
+    }
+    demo
+    neutron
+    cinder
+}
+state Project_* {
+	Project_admin
+	Project_nova
+	Project_glance
+	Project_public
+}
+Groupstandard:Group_standard
+Groupadmin:Group_admin
+Grouppremium:Group_premium
+Groupadmin --> Project_* : admin
+Grouppremium --> Project_public : admin
+Groupstandard --> Project_public : reader
+admin --> Project_admin : admin
+nova --> Project_nova : admin
+glance --> Project_glance : admin
+```
+
 ## Project setup
 
 1. Connect to the database server
