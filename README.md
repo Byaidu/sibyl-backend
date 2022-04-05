@@ -16,6 +16,12 @@ USE sibyl;
 CREATE TABLE user (name VARCHAR(255), info VARCHAR(255));
 ```
 
+3. Configure RBAC rules
+
+```
+./init_keystone.sh
+```
+
 ## Project deploy
 
 ```
